@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container index-container">
+  <image src='https://i.loli.net/2019/07/11/5d2731e754f1427271.png' style='width: 90px; height: 90px;' class='image'  animation='{{logoAni}}'></image>
+  <text class='index-title' animation='{{titleAni}}'>青春在线</text>
+  <text class='index-content' animation='{{txtAni}}'>你终于来啦，我们已经等你很久了！</text>
+  <i-button></i-button>
+</view>
