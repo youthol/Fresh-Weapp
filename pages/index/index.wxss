@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 .index-container {
   padding-top: 200rpx !important;
 }
@@ -7,19 +8,24 @@
   padding-top: 10px;
   color: #585858;
   opacity: 0;
-  position: relative;
-  top: 0;
+  transform: translateY(0);
 }
 
 .index-content {
   color: #585858;
   font-size: 14px;
-  padding-top: 40px;
+  padding-top: 60px;
   opacity: 0;
+  transform: translateY(0);
 }
 
 .image {
   opacity: 0;
-  position: relative;
-  top: 0;
+  transform: translateY(0);
+}
+
+.index-btn {
+  opacity: 0;
+  transform: translateY(0);
+  padding-top: 60px;
 }

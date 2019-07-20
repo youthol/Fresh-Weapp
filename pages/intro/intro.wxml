@@ -1,0 +1,49 @@
+<view class='intro-container'>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      综合部
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      媒体中心
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      新闻部
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      技术部-程序
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      技术部-美工
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      技术部-闪客
+    </view>
+  </view>
+  <view class='intro-item-container'>
+    <view class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
+      摄影小组
+    </view>
+  </view>
+
+
+  <van-popup show="{{popupShow}}" position="bottom" overlay="{{ true }}" bind:close="onClose" custom-class='intro-popup'>
+    <view class='intro-popup-header'>
+      <image src='../../img/fresh-close.png' mode='scaleToFill' class='intro-popup-header-close' catchtap='onClose'></image>
+    </view>
+    <scroll-view class='intro-popup-scroll' scroll-y='true'>
+      <view>
+      
+      </view>
+    </scroll-view>
+  </van-popup>
+</view>
