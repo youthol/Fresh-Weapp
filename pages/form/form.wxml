@@ -55,9 +55,19 @@
 
   <van-field
     required
+    disabled
     value="{{ phone }}"
-    label="意向部门"
-    placeholder="请选择意向部门"
+    label="意向部门1"
+    placeholder="请选择第一意向部门"
+    bindtap='onPopupShow'
+  />
+
+  <van-field
+    disabled
+    value="{{ phone }}"
+    label="意向部门2"
+    placeholder="请选择第二意向部门"
+    bindtap='onPopupShow'
   />
 
   <van-field
@@ -70,7 +80,7 @@
     input-class="form-intro"
   />
 
-  <text class='form-tip'>注：为了确保审核的正常进行，报名信息请认真填写哦！</text>
+  <text class='form-tip'>注：为了确保审核的正常进行，请认真填写报名信息哦！</text>
 
   <van-button type='info' custom-class='form-sub-btn' block round>提 交</van-button>
   
@@ -83,7 +93,8 @@
     <view class='confirm' catchtap='onSexConfirm'>确认</view>
   </view>
 
-  <picker-view wx:if='{{}}'
+  <!-- 性别选择picker -->
+  <picker-view wx:if='{{ sexPickerShow }}'
     indicator-class="form-indicator" 
     class="form-picker" 
     value="{{value}}"
@@ -95,6 +106,23 @@
         class='form-picker-column-item'
       >
         {{item.sex}}
+      </view>
+    </picker-view-column>
+  </picker-view>
+
+  <!-- 部门选择picker -->
+  <picker-view wx:if='{{ departmentPickerShow }}'
+    indicator-class="form-indicator" 
+    class="form-picker" 
+    value="{{value}}"
+  >
+    <picker-view-column>
+      <view 
+        wx:for="{{departmentColumns}}" 
+        wx:key='{{item.id}}' 
+        class='form-picker-column-item'
+      >
+        {{item.department}}
       </view>
     </picker-view-column>
   </picker-view>

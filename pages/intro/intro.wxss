@@ -7,6 +7,8 @@ page {
 .intro-item-container {
   height: 100rpx;
   padding-top: 45rpx;
+  opacity: 0;
+  transform: translateX(40rpx);
 }
 
 .intro-item {
@@ -16,10 +18,8 @@ page {
   line-height: 100rpx;
   width: 70%;
   height: 100rpx;
-  /* background-color: #f8f8f9; */
   background-image: linear-gradient(to right, #05befe, #5490f7);
   margin: 0 auto;
-  /* margin-top: 45rpx; */
   border-radius: 20rpx;
   box-shadow: 0 10rpx 40rpx rgba(170, 170, 170, 0.918);
   transition: width .2s, height .2s;
@@ -28,7 +28,6 @@ page {
 .intro-item-hover {
  width: 67%;
  height: 96rpx;
- /* background-color: #f3f3f3; */
  background-image: linear-gradient(to right, #05c0febb, #5490f7d2);
 }
 

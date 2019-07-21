@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/form/form",
     "pages/intro/intro",
+    "pages/form/form",
     "pages/index/index"
   ],
   "window": {

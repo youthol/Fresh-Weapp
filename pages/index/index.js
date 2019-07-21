@@ -13,13 +13,13 @@ Page({
     this.showAni();
   },
   showAni: function () {
-    var logoAni = wx.createAnimation({
+    const logoAni = wx.createAnimation({
       duration: 600,
       delay: 400,
       timingFunction: "ease"
     });
 
-    var titleAni = wx.createAnimation({
+    const titleAni = wx.createAnimation({
       duration: 600,
       delay: 600,
       timingFunction: "ease"

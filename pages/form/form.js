@@ -6,8 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
-    popupShow: true,
+    popupShow: false,
+    sexPickerShow: false,
+    departmentPickerShow: true,
     sexColumns: [
       {
         id: 1,
@@ -20,6 +21,36 @@ Page({
       {
         id: 3,
         sex: '未知🤔'
+      }
+    ],
+    departmentColumns: [
+      {
+        id: 1,
+        department: '综合部'
+      },
+      {
+        id: 2,
+        department: '媒体中心'
+      },
+      {
+        id: 3,
+        department: '新闻部'
+      },
+      {
+        id: 4,
+        department: '技术部-程序'
+      },
+      {
+        id: 5,
+        department: '技术部-美工'
+      },
+      {
+        id: 6,
+        department: '技术部-闪客'
+      },
+      {
+        id: 7,
+        department: '摄影小组'
       }
     ]
   },
@@ -34,13 +65,23 @@ Page({
     this.setData({ popupShow: false });
   },
 
-  // 取消选择
+  // 取消性别选择器
   onSexConcel() {
     this.onClose();
   },
 
-  // 确认选择
+  // 确认性别选择器
   onSexConfirm() {
+    this.onClose();
+  },
+
+  // 取消性别选择器
+  onDepartmentConcel() {
+    this.onClose();
+  },
+
+  // 确认性别选择器
+  onDepartmentConfirm() {
     this.onClose();
   },
 
