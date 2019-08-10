@@ -1,127 +1,69 @@
 <!--pages/form/form.wxml-->
 <van-cell-group>
-  <van-field 
-    value="{{ username }}" 
-    required 
-    clearable 
-    label="姓名" 
-    placeholder="请输入姓名" 
-    bind:click-icon="onClickIcon" 
-  />
+  <van-field value="{{ username }}" required clearable label="姓名" placeholder="请输入姓名" bind:click-icon="onClickIcon" />
 
-  <van-field 
-    value="{{ sex }}" 
-    label="性别" 
-    placeholder="请选择性别"
-    bindtap='onPopupShow'
-    disabled
-  />
+  <van-field value="{{ sexColumns[sexValue].sex }}" label="性别" placeholder="请选择性别" bindtap='onSexPopupShow' readonly />
 
-  <van-field 
-    value="{{ username }}" 
-    required 
-    clearable 
-    type="number"
-    label="学号" 
-    placeholder="请输入学号" 
-  />
+  <van-field value="{{ username }}" required clearable type="number" label="学号" placeholder="请输入学号" maxlength="11" />
 
-  <van-field
-    required
-    value="{{ phone }}"
-    label="手机号"
-    placeholder="请输入手机号"
-  />
+  <van-field required value="{{ phone }}" label="手机号" type="tel" placeholder="请输入手机号" maxlength="11" />
 
-  <van-field
-    value="{{ phone }}"
-    label="邮箱"
-    placeholder="请输入邮箱"
-  />
+  <van-field value="{{ email }}" label="邮箱" type="email" placeholder="请输入邮箱" />
 
-  <van-field
-    required
-    value="{{ phone }}"
-    label="学院"
-    placeholder="请选择所在学院"
-  />
+  <van-field required readonly value="{{ college[collegeValue].name }}" label="学院" bindtap='onCollegePopupShow'/>
 
-  <van-field
-    required
-    value="{{ phone }}"
-    label="专业班级"
-    placeholder="请输入专业班级"
-  />
+  <van-field required value="{{ class }}" label="专业班级" placeholder="请输入专业班级" />
 
-  <van-field
-    required
-    disabled
-    value="{{ phone }}"
-    label="意向部门1"
-    placeholder="请选择第一意向部门"
-    bindtap='onPopupShow'
-  />
+  <van-field required readonly value="{{ departmentColumns1[departmentValue1].department }}" label="意向部门 1" bindtap='onDepartmentPopupShow' data-id="1" />
 
-  <van-field
-    disabled
-    value="{{ phone }}"
-    label="意向部门2"
-    placeholder="请选择第二意向部门"
-    bindtap='onPopupShow'
-  />
+  <van-field readonly value="{{ departmentColumns2[departmentValue2].department }}" label="意向部门 2" bindtap='onDepartmentPopupShow' data-id="2" />
 
-  <van-field
-    required
-    value="{{ message }}"
-    label="个人简介"
-    type="textarea"
-    placeholder="赶紧介绍一下自己有趣的灵魂叭~ ♪(´▽｀)"
-    autosize
-    input-class="form-intro"
-  />
+  <van-field required value="{{ message }}" label="个人简介" type="textarea" placeholder="赶紧介绍一下自己有趣的灵魂叭~ ♪(´▽｀)" autosize input-class="form-intro" />
 
   <text class='form-tip'>注：为了确保审核的正常进行，请认真填写报名信息哦！</text>
 
   <van-button loading='{{false}}' type='info' custom-class='form-sub-btn' block round loading-text="提交中...">提 交</van-button>
-  
+
 </van-cell-group>
 
 <van-popup show="{{ popupShow }}" bind:close="onClose" position="bottom">
 
   <view class='form-picker-header'>
-    <view class='cancel' catchtap='onSexConcel'>取消</view>
-    <view class='confirm' catchtap='onSexConfirm'>确认</view>
+    <!-- <view class='cancel' catchtap='onSexConcel'>取消</view> -->
+    <view class='confirm' catchtap='onClose'>确认</view>
   </view>
 
   <!-- 性别选择picker -->
-  <picker-view wx:if='{{ sexPickerShow }}'
-    indicator-class="form-indicator" 
-    class="form-picker" 
-    value="{{value}}"
-  >
+  <picker-view wx:if='{{ sexPickerShow }}' indicator-class="form-indicator" class="form-picker" value="{{sexValue}}" bindchange="changeSex">
     <picker-view-column>
-      <view 
-        wx:for="{{sexColumns}}" 
-        wx:key='{{item.id}}' 
-        class='form-picker-column-item'
-      >
+      <view wx:for="{{sexColumns}}" wx:key='{{item.id}}' class='form-picker-column-item'>
         {{item.sex}}
       </view>
     </picker-view-column>
   </picker-view>
 
-  <!-- 部门选择picker -->
-  <picker-view wx:if='{{ departmentPickerShow }}'
-    indicator-class="form-indicator" 
-    class="form-picker" 
-    value="{{value}}"
-  >
+    <!-- 学院选择picker -->
+  <picker-view wx:if='{{ collegePickerShow }}' indicator-class="form-indicator" class="form-picker" value="{{collegeValue}}" bindchange="changeCollege">
     <picker-view-column>
-      <view 
-        wx:for="{{departmentColumns}}" 
-        wx:key='{{item.id}}' 
-        class='form-picker-column-item'
-      >
+      <view wx:for="{{college}}" wx:key='{{item.id}}' class='form-picker-column-item'>
+        {{item.name}}
+      </view>
+    </picker-view-column>
+  </picker-view>
+
+  <!-- 部门1选择picker -->
+  <picker-view wx:if='{{ departmentPickerShow1 }}' indicator-class="form-indicator" class="form-picker" value="{{departmentValue1}}" bindchange="changeDepartment" data-id="1">
+    <picker-view-column>
+      <view wx:for="{{departmentColumns1}}" wx:key='{{item.id}}' class='form-picker-column-item'>
+        {{item.department}}
+      </view>
+    </picker-view-column>
+  </picker-view>
+
+    <!-- 部门2选择picker -->
+  <picker-view wx:if='{{ departmentPickerShow2 }}' indicator-class="form-indicator" class="form-picker" value="{{departmentValue2}}" bindchange="changeDepartment" data-id="2">
+    <picker-view-column>
+      <view wx:for="{{departmentColumns2}}" wx:key='{{item.id}}' class='form-picker-column-item'>
         {{item.department}}
       </view>
     </picker-view-column>
