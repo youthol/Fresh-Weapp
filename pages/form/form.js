@@ -8,7 +8,8 @@ Page({
   data: {
     popupShow: false,
     sexPickerShow: false,
-    departmentPickerShow: true,
+    departmentPickerShow: false,
+    index: 0,
     sexColumns: [
       {
         id: 1,

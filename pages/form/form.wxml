@@ -82,7 +82,7 @@
 
   <text class='form-tip'>注：为了确保审核的正常进行，请认真填写报名信息哦！</text>
 
-  <van-button type='info' custom-class='form-sub-btn' block round>提 交</van-button>
+  <van-button loading='{{false}}' type='info' custom-class='form-sub-btn' block round loading-text="提交中...">提 交</van-button>
   
 </van-cell-group>
 
