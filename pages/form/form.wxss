@@ -1,4 +1,7 @@
 /* pages/form/form.wxss */
+.solt {
+  height: 50rpx;
+}
 
 .form-intro {
   max-height: 240px !important;
