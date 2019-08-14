@@ -11,6 +11,7 @@ Page({
     loadIntro: true, // 是否在加载介绍的文字
     popupContentId: null, // 介绍文字的部门id
     popupContent: null, // 介绍文字的内容
+    popupImg: null,
     departmentList: [{
         id: 1,
         department: "综合部",
@@ -37,19 +38,19 @@ Page({
       },
       {
         id: 5,
-        department: "技术支持部-程序",
+        department: "技术部-程序",
         ani: null,
         intro: null
       },
       {
         id: 6,
-        department: "技术支持部-美工",
+        department: "技术部-美工",
         ani: null,
         intro: null
       },
       {
         id: 7,
-        department: "技术支持部-闪客",
+        department: "技术部-闪客",
         ani: null,
         intro: null
       },

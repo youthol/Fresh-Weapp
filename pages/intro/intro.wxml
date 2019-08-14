@@ -18,7 +18,7 @@
       <view wx:if="{{haveIntro}}" class="intro-content-view">
         <rich-text nodes="{{popupContent}}">
         </rich-text>
-        <!-- <image src="{{popupImg}}"></image> -->
+        <image src="{{popupImg}}"></image>
         <view class='intro-btn' hover-class="intro-btn-hover" animation='{{btnAni}}' bindtap="toForm">开始报名</view>
       </view>
       <view wx:else class="intro-content-view">

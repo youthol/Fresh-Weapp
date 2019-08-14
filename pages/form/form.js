@@ -315,9 +315,12 @@ Page({
 
     wx.request({
       url: "https://youthapi.sdut.edu.cn/api/service/recruit",
+      // url: "http://localhost/api/service/recruit",
       method: "POST",
       data: data,
-      seccess: () => { },
+      seccess: (res) => {
+        res.data
+      },
       fail: () => { }
     });
   },
