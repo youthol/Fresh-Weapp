@@ -11,8 +11,9 @@ Page({
     loadIntro: true, // 是否在加载介绍的文字
     popupContentId: null, // 介绍文字的部门id
     popupContent: null, // 介绍文字的内容
-    popupImg: null,
-    departmentList: [{
+    popupImg: null, // 部门介绍的图片链接
+    departmentList: [
+      {
         id: 1,
         department: "综合部",
         ani: null,
@@ -74,17 +75,20 @@ Page({
     this.setData({
       loadIntro: true
     });
-    const weRich = require('we-rich');
+
+    const weRich = require("we-rich");
+
     wx.request({
-      url: 'https://youthapi.sdut.edu.cn/api/miniProgram/departmentIntro',
-      success: (res) => {
+      url: "https://youthapi.sdut.edu.cn/api/mini/departmentIntro",
+      success: res => {
         const newList = this.data.departmentList;
         let nodes = null;
         if (res.statusCode === 200 && res.data.data) {
           for (let i = 0; i < res.data.data.length; i++) {
             nodes = weRich.parse(res.data.data[i].intro);
-            newList[i].intro = nodes
-          };
+            newList[i].intro = nodes;
+          }
+
           this.setData({
             departmentList: newList,
             haveIntro: true
@@ -102,7 +106,7 @@ Page({
           loadIntro: false
         });
       }
-    })
+    });
   },
 
   /**
@@ -113,7 +117,7 @@ Page({
     const popupContentId = this.data.popupContentId;
     this.setData({
       popupContent: this.data.departmentList[popupContentId - 1].intro
-    })
+    });
   },
 
   // 展示弹出层
@@ -159,20 +163,18 @@ Page({
       timingFunction: "ease"
     });
 
-    btnAni
-      .opacity(1)
-      .step();
+    btnAni.opacity(1).step();
 
     this.setData({
       btnAni: btnAni.export(),
       departmentList: newList
-    })
+    });
   },
 
   toForm: function() {
     wx.navigateTo({
-      url: '/pages/form/form',
-    })
+      url: "/pages/form/form"
+    });
   },
 
   /**
