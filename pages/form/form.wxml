@@ -1,9 +1,16 @@
 <!-- pages/form/form.wxml -->
-<van-notice-bar wx:if="{{noticeShow}}" left-icon="volume-o" mode="closeable" text="{{notice}}" />
-<view  wx:else class="solt" hover-class="none" hover-stop-propagation="false">
-	
-</view>
-	
+<van-notice-bar
+ wx:if="{{noticeShow}}"
+ left-icon="volume-o"
+ mode="closeable"
+ text="{{notice}}"
+/>
+<view
+ wx:else
+ class="solt"
+ hover-class="none"
+ hover-stop-propagation="false"
+/>
 <van-cell-group>
 	<van-field
 	 value="{{ name }}"
@@ -98,7 +105,11 @@
 	 error="{{errorState.intro}}"
 	 bind:change="setFormData"
 	/>
-	<text class='form-tip'>注：为了确保审核的正常进行，请认真填写报名信息哦！</text>
+	<text class='form-tip'>
+		<text>注：\n</text>
+	<text class="remark-item">1. * 为必填项；\n</text>
+	<text class="remark-item">2. 为了确保审核的正常进行，请认真填写报名信息哦！\n</text>
+	</text>
 	<van-button
 	 loading='{{submitState}}'
 	 type='info'
@@ -176,6 +187,5 @@
 		</picker-view-column>
 	</picker-view>
 </van-popup>
-
 <van-notify id="error-notify" />
 

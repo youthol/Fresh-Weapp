@@ -1,5 +1,6 @@
 // pages/form/form.js
 import Notify from "../../miniprogram_npm/vant-weapp/notify/notify.js";
+import api from "../../http/api.js";
 
 Page({
   /**
@@ -221,7 +222,7 @@ Page({
   // 获取宿舍信息
   getCollege() {
     wx.request({
-      url: "https://youthapi.sdut.edu.cn/api/college",
+      url: api.college,
       success: res => {
         if (res.statusCode === 200 && res.data) {
           this.setData({
@@ -236,12 +237,10 @@ Page({
   // 验证表单
   checkForm(data) {
     // 遍历data对象，检测是否为空，
-    // 邮箱和第二志愿可以空，但只有email的值为null
+    // 邮箱和第二志愿可以空，但只有email的值可以为null
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         const element = data[key];
-        console.log(element);
-
         if (element === null && key !== "email") {
           console.log(key);
 
@@ -258,12 +257,12 @@ Page({
     if (data.part_1 === 0) {
       return {
         type: "error",
-        msg: "第一志愿的值无效！"
+        msg: "请选择第一意向部门！"
       };
     } else if (data.part_2 === data.part_1) {
       return {
         type: "error",
-        msg: "第一志愿和第二志愿不能相同！"
+        msg: "第一意向和第二意向不能相同！"
       };
     }
 
@@ -291,6 +290,7 @@ Page({
     const result = this.checkForm(data);
     if (result.type === "error") {
       switch (result.msg) {
+        // 空结果
         case "empty":
           this.setData({
             errorState: {
@@ -305,24 +305,39 @@ Page({
             backgroundColor: "#ed4014"
           });
           return;
-
+        // 第一志愿出现错误
         default:
-          break;
+          Notify({
+            text: result.msg,
+            duration: 1000,
+            selector: "#error-notify",
+            backgroundColor: "#ed4014"
+          });
+          return;
       }
     }
 
     wx.request({
-      url: "https://youthapi.sdut.edu.cn/api/mini/recruit",
-      // url: "http://localhost/api/service/recruit",
+      url: api.form,
       method: "POST",
       header: {
         "content-type": "application/x-www-form-urlencoded"
       },
       data: data,
-      seccess: res => {
-        res.data;
+      success: res => {
+        console.log(res);
+        console.log(res.data);
+        if (res.statusCode === 200) {
+        }
       },
-      fail: () => {}
+      fail: err => {
+        Notify({
+          text: "服务器错误，请稍后再试！",
+          duration: 1000,
+          selector: "#error-notify",
+          backgroundColor: "#ed4014"
+        });
+      }
     });
   },
 

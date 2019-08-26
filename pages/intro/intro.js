@@ -1,4 +1,4 @@
-// pages/intro/intro.js
+import api from "../../http/api";
 
 Page({
   /**
@@ -79,7 +79,7 @@ Page({
     const weRich = require("we-rich");
 
     wx.request({
-      url: "https://youthapi.sdut.edu.cn/api/mini/departmentIntro",
+      url: api.departmentIntro,
       success: res => {
         const newList = this.data.departmentList;
         let nodes = null;
