@@ -1,0 +1,10 @@
+<!--pages/result/result.wxml-->
+<view class="icon-container">
+	<view class="icon-item">
+		<van-icon name="success" class="success" />
+	</view>
+</view>
+
+<text class="msg">{{msg}}</text>
+<text class='msg desc'>请等待后续短信通知。</text>
+

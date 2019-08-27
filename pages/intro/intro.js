@@ -116,7 +116,11 @@ Page({
   renderContent() {
     const popupContentId = this.data.popupContentId;
     this.setData({
-      popupContent: this.data.departmentList[popupContentId - 1].intro
+      popupContent: this.data.departmentList[popupContentId - 1].intro,
+      popupImg:
+        "https://youthlab.sdut.edu.cn/library/2019department/" +
+        popupContentId +
+        ".png"
     });
   },
 

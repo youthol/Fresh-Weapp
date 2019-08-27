@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/intro/intro",
     "pages/form/form",
-    "pages/index/index"
+    "pages/result/result"
   ],
   "window": {
     "backgroundTextStyle": "light",

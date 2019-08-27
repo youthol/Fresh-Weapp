@@ -1,38 +1,65 @@
 <view class='intro-container'>
-  <block wx:for="{{departmentList}}" wx:key="id">
-    <view class='intro-item-container' animation="{{item.ani}}">
-      <view id="{{item.id}}" class='intro-item' hover-class='intro-item-hover' bindtap='onPopupShow'>
-        {{item.department}}
-      </view>
-    </view>
-  </block>
+	<block wx:for="{{departmentList}}" wx:key="id">
+		<view class='intro-item-container' animation="{{item.ani}}">
+			<view
+			 id="{{item.id}}"
+			 class='intro-item'
+			 hover-class='intro-item-hover'
+			 bindtap='onPopupShow'
+			>
+				{{item.department}}
+			</view>
+		</view>
+	</block>
 
-  <view class='intro-btn' hover-class="intro-btn-hover" animation='{{btnAni}}' bindtap="toForm">开始报名</view>
+	<view
+	 class='intro-btn'
+	 hover-class="intro-btn-hover"
+	 animation='{{btnAni}}'
+	 bindtap="toForm"
+	>开始报名
+	</view>
 
-
-  <van-popup show="{{popupShow}}" position="bottom" overlay="{{ true }}" bind:close="onClose" custom-class='intro-popup'>
-    <view class='intro-popup-header'>
-      <van-icon name="close" size="52rpx" class="close" catchtap="onClose" />
-    </view>
-    <scroll-view class='intro-popup-scroll' scroll-y='true'>
-      <view wx:if="{{haveIntro}}" class="intro-content-view">
-        <rich-text nodes="{{popupContent}}">
-        </rich-text>
-        <image src="{{popupImg}}"></image>
-        <view class='intro-btn' hover-class="intro-btn-hover" animation='{{btnAni}}' bindtap="toForm">开始报名</view>
-      </view>
-      <view wx:else class="intro-content-view">
-        <view wx:if="{{loadIntro}}" class="intro-loading-state">
-          <van-loading />
-          <view class="intro-loading-font">数据加载中，请稍后...</view>
-        </view>
-        <view wx:else class="intro-loading-state" catchtap="getDepartmentIntro">
-          <van-icon name="warning-o" size="30px" color="#c9c9c9" />
-          <view class="intro-loading-font">数据加载异常，
-            <text class="reload" catchtap="getDepartmentIntro">点击重试</text>
-          </view>
-        </view>
-      </view>
-    </scroll-view>
-  </van-popup>
+	<van-popup
+	 show="{{popupShow}}"
+	 position="bottom"
+	 overlay="{{ true }}"
+	 bind:close="onClose"
+	 custom-class='intro-popup'
+	>
+		<view class='intro-popup-header'>
+			<van-icon
+			 name="close"
+			 size="52rpx"
+			 class="close"
+			 catchtap="onClose"
+			/>
+		</view>
+		<scroll-view class='intro-popup-scroll' scroll-y='true'>
+			<view wx:if="{{haveIntro}}" class="intro-content-view">
+				<rich-text nodes="{{popupContent}}" />
+				<image src="{{popupImg}}" class="depart-img" mode="widthFix" />
+				<view
+				 class='intro-btn'
+				 hover-class="intro-btn-hover"
+				 animation='{{btnAni}}'
+				 bindtap="toForm"
+				>开始报名
+				</view>
+			</view>
+			<view wx:else class="intro-content-view">
+				<view wx:if="{{loadIntro}}" class="intro-loading-state">
+					<van-loading/>
+					<view class="intro-loading-font">数据加载中，请稍后...</view>
+				</view>
+				<view wx:else class="intro-loading-state" catchtap="getDepartmentIntro">
+					<van-icon name="warning-o" size="30px" color="#c9c9c9" />
+					<view class="intro-loading-font">数据加载异常，
+						<text class="reload" catchtap="getDepartmentIntro">点击重试</text>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</van-popup>
 </view>
+

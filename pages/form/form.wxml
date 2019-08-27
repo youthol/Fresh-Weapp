@@ -106,9 +106,10 @@
 	 bind:change="setFormData"
 	/>
 	<text class='form-tip'>
-		<text>注：\n</text>
+				<text>注：\n</text>
 	<text class="remark-item">1. * 为必填项；\n</text>
-	<text class="remark-item">2. 为了确保审核的正常进行，请认真填写报名信息哦！\n</text>
+	<text class="remark-item">2. 信息提交后，每个学号可以更新三次数据；\n</text>
+	<text class="remark-item">3. 为了确保审核的正常进行，请认真填写报名信息哦！\n</text>
 	</text>
 	<van-button
 	 loading='{{submitState}}'

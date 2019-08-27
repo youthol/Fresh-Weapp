@@ -271,7 +271,12 @@ Page({
     };
   },
 
-  // 提交表单
+  /**
+   * 表单提交
+   * 1. 获取规范表单数据
+   * 2. 数据验证
+   * 3. 提交
+   */
   submitForm() {
     // 表单数据
     const data = {
@@ -300,7 +305,7 @@ Page({
           });
           Notify({
             text: "请将信息填写完整！",
-            duration: 1000,
+            duration: 1500,
             selector: "#error-notify",
             backgroundColor: "#ed4014"
           });
@@ -317,6 +322,11 @@ Page({
       }
     }
 
+    // 更换提交按钮状态
+    this.setData({
+      submitState: true
+    });
+
     wx.request({
       url: api.form,
       method: "POST",
@@ -325,17 +335,38 @@ Page({
       },
       data: data,
       success: res => {
-        console.log(res);
-        console.log(res.data);
         if (res.statusCode === 200) {
+          this.setData({
+            submitState: false
+          });
+          if (res.data.code === 2) {
+            wx.navigateTo({
+              url: "/pages/result/result?type=update"
+            });
+            return;
+          }
+          if (res.data.code === 3) {
+            Notify({
+              text: res.data.msg,
+              duration: 2000,
+              selector: "#error-notify",
+              backgroundColor: "#ed4014"
+            });
+          }
+          wx.navigateTo({
+            url: "/pages/result/result?type=insert"
+          });
         }
       },
       fail: err => {
         Notify({
           text: "服务器错误，请稍后再试！",
-          duration: 1000,
+          duration: 1500,
           selector: "#error-notify",
           backgroundColor: "#ed4014"
+        });
+        this.setData({
+          submitState: false
         });
       }
     });

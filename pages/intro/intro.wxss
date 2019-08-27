@@ -80,7 +80,10 @@ page {
 .intro-popup-scroll {
   width: 100%;
   height: 720rpx;
-  
+}
+
+.depart-img {
+  width: 100%;
 }
 
 .intro-content-view {
