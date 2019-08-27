@@ -280,18 +280,61 @@ Page({
       }
     }
 
+    // 检测是否含有非法字符
+    const illegal = ["test", "script", "admin"];
+    const illegalItem = {
+      name: {
+        title: "姓名",
+        value: false
+      },
+      class: {
+        title: "班级",
+        value: false
+      },
+      introduction: {
+        title: "个人简介",
+        value: false
+      }
+    };
+
+    illegal.forEach(index => {
+      if (data.name.indexOf(index) !== -1) {
+        illegalItem.name.value = true;
+      } else if (data.class.indexOf(index) !== -1) {
+        illegalItem.class.value = true;
+      } else if (data.introduction.indexOf(index) !== -1) {
+        illegalItem.introduction.value = true;
+      }
+    });
+
+    for (const key in illegalItem) {
+      if (illegalItem.hasOwnProperty(key)) {
+        const element = illegalItem[key];
+        if (element.value) {
+          return {
+            type: "error",
+            msg: element.title + "内含有非法字符！"
+          };
+        }
+      }
+    }
+
+    // 学号格式
     if (data.nb.length !== 11) {
       return {
         type: "error",
         msg: "请正确输入11位的学号！"
       };
     }
+
+    // 号码格式
     if (data.phone.length !== 11) {
       return {
         type: "error",
         msg: "请正确输入11位的电话号码！"
       };
     }
+
     // 检测第一志愿的值是否为有效值
     if (data.part_1 === 0) {
       return {
