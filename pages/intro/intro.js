@@ -6,6 +6,7 @@ Page({
    */
   data: {
     popupShow: false, // 是否展示弹出层
+    scrollTop: 0, // 弹出层滚动条的位置
     btnAni: null, // 按钮动画
     haveIntro: false, // 是否已拥有介绍的文字
     loadIntro: true, // 是否在加载介绍的文字
@@ -138,6 +139,13 @@ Page({
     this.setData({
       popupShow: false
     });
+    const bindThis = this;
+    const moveToTop = () => {
+      bindThis.setData({
+        scrollTop: "0px"
+      });
+    };
+    setTimeout(moveToTop, 500);
   },
 
   // 动画函数

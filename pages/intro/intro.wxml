@@ -35,7 +35,7 @@
 			 catchtap="onClose"
 			/>
 		</view>
-		<scroll-view class='intro-popup-scroll' scroll-y='true'>
+		<scroll-view class='intro-popup-scroll' scroll-y='true' scroll-top="{{scrollTop}}">
 			<view wx:if="{{haveIntro}}" class="intro-content-view">
 				<rich-text nodes="{{popupContent}}" />
 				<image src="{{popupImg}}" class="depart-img" mode="widthFix" />
