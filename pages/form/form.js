@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    notice: "报名时间为 2019-9-1 至 2019-10-1。",
-    noticeShow: true,
+    notice: "",
+    noticeShow: false,
     name: null,
     nb: null,
     phone: null,
@@ -234,6 +234,33 @@ Page({
     });
   },
 
+  getNotice() {
+    wx.request({
+      url: api.notice,
+      data: {},
+      method: "GET", // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: res => {
+        // success
+        if (res.statusCode === 200) {
+          if (res.data.code === 1) {
+            this.setData({
+              noticeShow: true,
+              notice: res.data.msg
+            });
+            return;
+          }
+        }
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    });
+  },
+
   // 验证表单
   checkForm(data) {
     // 遍历data对象，检测是否为空，
@@ -253,6 +280,18 @@ Page({
       }
     }
 
+    if (data.nb.length !== 11) {
+      return {
+        type: "error",
+        msg: "请正确输入11位的学号！"
+      };
+    }
+    if (data.phone.length !== 11) {
+      return {
+        type: "error",
+        msg: "请正确输入11位的电话号码！"
+      };
+    }
     // 检测第一志愿的值是否为有效值
     if (data.part_1 === 0) {
       return {
@@ -295,7 +334,7 @@ Page({
     const result = this.checkForm(data);
     if (result.type === "error") {
       switch (result.msg) {
-        // 空结果
+        // 有空项
         case "empty":
           this.setData({
             errorState: {
@@ -310,11 +349,12 @@ Page({
             backgroundColor: "#ed4014"
           });
           return;
-        // 第一志愿出现错误
+
+        // 其他错误
         default:
           Notify({
             text: result.msg,
-            duration: 1000,
+            duration: 1500,
             selector: "#error-notify",
             backgroundColor: "#ed4014"
           });
@@ -327,6 +367,7 @@ Page({
       submitState: true
     });
 
+    // 提交
     wx.request({
       url: api.form,
       method: "POST",
@@ -334,17 +375,24 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       data: data,
+
+      // 成功
       success: res => {
+        // 正确数据
         if (res.statusCode === 200) {
           this.setData({
             submitState: false
           });
+
+          // 更新未超过三次
           if (res.data.code === 2) {
             wx.navigateTo({
               url: "/pages/result/result?type=update"
             });
             return;
           }
+
+          // 更新超过三次
           if (res.data.code === 3) {
             Notify({
               text: res.data.msg,
@@ -352,12 +400,62 @@ Page({
               selector: "#error-notify",
               backgroundColor: "#ed4014"
             });
+            return;
           }
+
+          // 第一次提交
           wx.navigateTo({
             url: "/pages/result/result?type=insert"
           });
+
+          return;
         }
+
+        // 格式错误
+        if (res.statusCode === 500) {
+          // 邮箱格式错误
+          if (res.data.errors.email) {
+            Notify({
+              text: "邮箱格式错误！",
+              duration: 1500,
+              selector: "#error-notify",
+              backgroundColor: "#ed4014"
+            });
+          } else if (res.data.errors.name) {
+            Notify({
+              text: "姓名格式错误！",
+              duration: 1500,
+              selector: "#error-notify",
+              backgroundColor: "#ed4014"
+            });
+          } else if (res.data.errors.class) {
+            Notify({
+              text: "班级格式错误！",
+              duration: 1500,
+              selector: "#error-notify",
+              backgroundColor: "#ed4014"
+            });
+          }
+          this.setData({
+            submitState: false
+          });
+          return;
+        }
+
+        // 未知报错
+        Notify({
+          text: "服务器错误，请稍后再试！",
+          duration: 1500,
+          selector: "#error-notify",
+          backgroundColor: "#ed4014"
+        });
+        this.setData({
+          submitState: false
+        });
+        return;
       },
+
+      // 失败
       fail: err => {
         Notify({
           text: "服务器错误，请稍后再试！",
@@ -368,6 +466,7 @@ Page({
         this.setData({
           submitState: false
         });
+        return;
       }
     });
   },
@@ -389,7 +488,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+    this.getNotice();
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
