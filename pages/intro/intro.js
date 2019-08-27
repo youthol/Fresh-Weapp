@@ -129,6 +129,7 @@ Page({
   onPopupShow(e) {
     this.setData({
       popupShow: true,
+
       popupContentId: parseInt(e.target.id)
     });
     this.renderContent(); // 文字渲染
@@ -139,13 +140,13 @@ Page({
     this.setData({
       popupShow: false
     });
-    const bindThis = this;
     const moveToTop = () => {
-      bindThis.setData({
+      this.setData({
         scrollTop: "0px"
       });
     };
-    setTimeout(moveToTop, 500);
+
+    setTimeout(moveToTop, 200);
   },
 
   // 动画函数
