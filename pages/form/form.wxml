@@ -94,6 +94,7 @@
 	 data-id="2"
 	/>
 	<van-field
+	 wx:if="{{!popupShow}}"
 	 required
 	 value="{{ intro }}"
 	 data-id="intro"
@@ -105,12 +106,18 @@
 	 error="{{errorState.intro}}"
 	 bind:change="setFormData"
 	/>
+	<view class="filed-replace" wx:else>
+		<view class="filed-replace-title">个人简介</view>
+		<view class="filed-replace-content">{{introReplace}}</view>
+	</view>
+
 	<text class='form-tip'>
 				<text>注：\n</text>
 	<text class="remark-item">1. * 为必填项；\n</text>
 	<text class="remark-item">2. 信息提交后，每个学号可以更新三次数据；\n</text>
 	<text class="remark-item">3. 为了确保审核的正常进行，请认真填写报名信息哦！\n</text>
 	</text>
+
 	<van-button
 	 loading='{{submitState}}'
 	 type='info'
@@ -123,10 +130,11 @@
 	>
 		提 交
 	</van-button>
+
 </van-cell-group>
+
 <van-popup show="{{ popupShow }}" bind:close="onClose" position="bottom">
 	<view class='form-picker-header'>
-		<!-- <view class='cancel' catchtap='onSexConcel'>取消</view> -->
 		<view class='confirm' catchtap='onClose'>确认</view>
 	</view>
 	<!-- 性别选择picker -->

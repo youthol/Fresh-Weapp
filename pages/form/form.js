@@ -15,6 +15,7 @@ Page({
     email: null,
     class: null,
     intro: null,
+    introReplace: null,
     errorState: {
       name: false,
       nb: false,
@@ -135,6 +136,15 @@ Page({
 
   // 展示弹出层
   onPopupShow() {
+    if (this.data.intro === null) {
+      this.setData({
+        introReplace: "赶紧介绍一下自己有趣的灵魂叭~ ♪(´▽｀)"
+      });
+    } else {
+      this.setData({
+        introReplace: this.data.intro
+      });
+    }
     this.setData({
       popupShow: true
     });
