@@ -1,10 +1,10 @@
-<!--pages/result/result.wxml-->
+<!-- pages/result/result.wxml -->
 <view class="icon-container">
 	<view class="icon-item">
 		<van-icon name="success" class="success" />
 	</view>
 </view>
-
 <text class="msg">{{msg}}</text>
-<text class='msg desc'>请等待后续短信通知。</text>
+<text class='msg desc'>请加入青春在线纳新群，等待后续笔试通知。</text>
+<image src="https://youthlab.sdut.edu.cn/library/2019department/QQ.png" class="image" mode="widthFix" />
 

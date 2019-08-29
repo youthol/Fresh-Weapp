@@ -125,10 +125,11 @@
 	 custom-class='form-sub-btn'
 	 block
 	 round
+	 disabled='{{!isSubmit}}'
 	 loading-text="提交中..."
 	 bind:click="submitForm"
 	>
-		提 交
+		{{btnState}}
 	</van-button>
 
 </van-cell-group>

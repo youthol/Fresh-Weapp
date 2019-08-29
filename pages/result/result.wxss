@@ -35,3 +35,11 @@
   font-size: 28rpx;
   color: rgb(151, 161, 165);
 }
+
+.image {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50rpx;
+  padding-bottom: 50rpx;
+}

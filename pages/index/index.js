@@ -9,6 +9,14 @@ Page({
     txtAni: null,
     btnAni: null
   },
+
+  onShareAppMessage: function () {
+    return {
+      title: '青春在线纳新啦，赶紧报名吧！',
+      path: '/pages/index/index'
+    }
+  },
+  
   onLoad: function () {
     this.showAni();
   },

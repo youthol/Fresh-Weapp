@@ -9,6 +9,8 @@ Page({
   data: {
     notice: "",
     noticeShow: false,
+    isSubmit: true,
+    btnState: "提 交",
     name: null,
     nb: null,
     phone: null,
@@ -258,8 +260,21 @@ Page({
               noticeShow: true,
               notice: res.data.msg
             });
-            return;
           }
+
+          if (res.data.open) {
+            this.setData({
+              isSubmit: true,
+              btnState: "提 交"
+            });
+          } else {
+            this.setData({
+              isSubmit: false,
+              btnState: "未开放"
+            });
+          }
+
+          return;
         }
       },
       fail: function() {
@@ -279,8 +294,6 @@ Page({
       if (data.hasOwnProperty(key)) {
         const element = data[key];
         if (element === null && key !== "email") {
-          console.log(key);
-
           return {
             type: "error",
             msg: "empty",
@@ -568,5 +581,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  onShareAppMessage: function() {
+    return {
+      title: "青春在线纳新啦，赶紧报名吧！",
+      path: "/pages/index/index"
+    };
+  }
 });
