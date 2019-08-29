@@ -11,14 +11,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
     if (options.type === "update") {
-      console.log("111");
       this.setData({
         msg: "信息已更新！"
       });
     } else {
-      console.log("222");
       this.setData({
         msg: "信息提交成功！"
       });
@@ -58,10 +55,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
-      title: '青春在线纳新啦，赶紧报名吧！',
-      path: '/pages/index/index'
-    }
+      title: "青春在线纳新啦，赶紧报名吧！",
+      path: "/pages/index/index"
+    };
   }
 });
